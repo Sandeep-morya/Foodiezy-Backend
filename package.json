@@ -1,0 +1,15 @@
+{
+	"name": "foodiezy-backend",
+	"version": "1.0.0",
+	"main": "index.js",
+	"repository": "https://github.com/Sandeep-morya/Foodiezy-Backend.git",
+	"author": "Sandeep-morya <saabmaurya@gmail.com>",
+	"license": "MIT",
+	"type": "module",
+	"dependencies": {
+		"dotenv": "^16.3.1",
+		"graphql": "^16.7.1",
+		"graphql-yoga": "^4.0.3",
+		"socket.io": "^4.7.2"
+	}
+}
