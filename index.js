@@ -4,6 +4,7 @@ import { createServer } from "node:http";
 import schema from "./graphQL/schema.js";
 import { Server } from "socket.io";
 import connectDB from "./config/connection.js";
+import context from "./graphQL/context.js";
 
 // :: Connecting with MongoDB ::
 (async () => {
@@ -11,7 +12,14 @@ import connectDB from "./config/connection.js";
 	console.log(`Connected with the database of ${connection.name}`);
 })();
 
-const server = createServer(createYoga({ schema }));
+const server = createServer(
+	createYoga({
+		schema,
+		context: async ({ request }) => {
+			return { admin: true };
+		},
+	}),
+);
 
 const io = new Server(server, { cors: { origin: "*" } });
 

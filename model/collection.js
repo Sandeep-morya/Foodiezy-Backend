@@ -2,13 +2,13 @@
 
 const collectionSchema = new Schema(
 	{
-		area_id: {
+		serviceAreaId: {
 			type: Schema.Types.ObjectId,
 			ref: "ServiceArea",
 			required: true,
 		},
 		type: { type: String, required: true },
-		collection_id: { type: String, required: true },
+		collectionId: { type: String, required: true },
 		imageId: { type: String, required: true },
 		text: { type: String, required: true },
 		altText: { type: String, required: true },

@@ -7,13 +7,13 @@
         createdAt: String
         updatedAt: String
         collections:[Collection]
-        restaurants:[Restaurant]
+        restaurants:Restaurants
     }
     type Collection {
         _id:ID
-		area_id: ID
+		serviceAreaId: ID
         type: String
-		collection_id: String
+		collectionId: String
 		imageId: String
 		text: String
 		altText: String
@@ -21,13 +21,21 @@
         updatedAt: String
     }
     type Delivery {
-        time: Int
+        time: Float
         duration: String
         distance: String
     }
+    type Restaurants {
+        serviceAreaId:ID
+        page:Int
+        limit:Int
+        count:Int
+        totalCount:Int
+        documents:[Restaurant]
+    }
     type Restaurant {
         _id:ID
-		area_id: ID
+		serviceAreaId: ID
         type: String
 		restaurantId: String
 		name: String
@@ -37,7 +45,7 @@
 		veg: Boolean
 		areaName: String
 		costForTwo: String
-		rating: Int
+		rating: Float
 		votesString: String
 		delivery: Delivery
 		discount: String
@@ -45,25 +53,23 @@
         updatedAt: String
     }
 
-    type InitialData {
-        done:String
-        serviceArea:ServiceArea
-        method:String
-        userAgent:String
-        time:String
-    }
 
-    input NewCollection {
-        area_id: ID!
+    input CollectionsInput {
+        serviceAreaId: ID!
         type: String!
-        collection_id: String!
+        collectionId: String!
         imageId: String!
         text:String!
         altText: String!
     }
+    input DeliveryInfo {
+        time: Float!
+        duration: String!
+        distance: String!
+    }
 
-    input NewRestaurant {
-        area_id: ID!
+    input RestaurantsInput {
+        serviceAreaId: ID!
         type: String!
 		restaurantId: String!
 		name: String!
@@ -73,21 +79,27 @@
 		veg: Boolean!
 		areaName: String!
 		costForTwo: String!
-		rating: Int!
+		rating: Float!
 		votesString: String!
-		delivery: Delivery!
+		delivery: DeliveryInfo!
 		discount: String!
     }
 
     type Query {
-        getAllByCity(city:String!,page:Int,limit:Int):InitialData
+        getServiceAreaData(serviceAreaName:String!):ServiceArea
+        getRestaurants(serviceAreaId:ID!,page:Int,limit:Int):Restaurants
+        getCollections(serviceAreaId:ID!):[Collection]
     }
 
-    # union CollectionMutationResponse = String | Boolean --will use later
-
+    type MutationResponse {
+        status:Boolean,
+        message:String!
+        keys:[ID!]
+        count:Int!
+    }
     type Mutation {
-        addServiceArea(name:String!, lat:Float!,lng:Float!):String
-        addCollections(newCollection:[NewCollection]!):String
-        addRestaurants(newRestaurant:[NewRestaurant]!):String
+        addServiceArea(name:String!, lat:Float!,lng:Float!):MutationResponse
+        addCollections(collectionsInput:[CollectionsInput]!):MutationResponse
+        addRestaurants(restaurantsInput:[RestaurantsInput]!):MutationResponse
     }
 `;

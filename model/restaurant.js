@@ -2,7 +2,7 @@
 
 const restaurantSchema = new Schema(
 	{
-		area_id: {
+		serviceAreaId: {
 			type: Schema.Types.ObjectId,
 			ref: "ServiceArea",
 			required: true,
@@ -12,7 +12,7 @@ const restaurantSchema = new Schema(
 		name: { type: String, required: true },
 		imageId: { type: String, required: true },
 		cuisines: { type: [String], default: [] },
-		locality: { type: String, required: true },
+		locality: { type: String, default: "" },
 		veg: { type: Boolean, required: true },
 		areaName: { type: String, required: true },
 		costForTwo: { type: String, required: true },
@@ -23,7 +23,7 @@ const restaurantSchema = new Schema(
 			duration: { type: String, required: true },
 			distance: { type: String, default: "" },
 		},
-		discount: { type: String, required: true },
+		discount: { type: String, default: "" },
 	},
 	{ timestamps: true },
 );
