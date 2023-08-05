@@ -1,5 +1,5 @@
 ﻿const Query = {
-	greeting: () => "Hello from Graphql",
+	getInitialData: async (_, { city }) => {},
 };
 
 export default Query;

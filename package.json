@@ -6,10 +6,16 @@
 	"author": "Sandeep-morya <saabmaurya@gmail.com>",
 	"license": "MIT",
 	"type": "module",
+	"scripts": {
+		"dev": "nodemon index.js"
+	},
 	"dependencies": {
+		"bcrypt": "^5.1.0",
 		"dotenv": "^16.3.1",
 		"graphql": "^16.7.1",
 		"graphql-yoga": "^4.0.3",
+		"jsonwebtoken": "^9.0.1",
+		"mongoose": "^7.4.2",
 		"socket.io": "^4.7.2"
 	}
 }
