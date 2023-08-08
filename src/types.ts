@@ -1,6 +1,4 @@
-﻿export interface Context {
-	admin: boolean;
-}
+﻿export interface Context {}
 
 export type Parent = null;
 
