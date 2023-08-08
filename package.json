@@ -1,0 +1,26 @@
+{
+	"name": "foodiezy-backend",
+	"version": "1.0.0",
+	"main": "index.js",
+	"repository": "https://github.com/Sandeep-morya/Foodiezy-Backend.git",
+	"author": "Sandeep-morya <saabmaurya@gmail.com>",
+	"license": "MIT",
+	"scripts": {
+		"start": "node build/index.js",
+		"dev": "tsc-watch --onSuccess \"yarn start\""
+	},
+	"devDependencies": {
+		"@types/express": "^4.17.17",
+		"tsc-watch": "^6.0.4",
+		"typescript": "^5.1.6"
+	},
+	"dependencies": {
+		"@apollo/server": "^4.9.1",
+		"@types/cors": "^2.8.13",
+		"cors": "^2.8.5",
+		"dotenv": "^16.3.1",
+		"express": "^4.18.2",
+		"graphql": "^16.7.1",
+		"mongoose": "^7.4.2"
+	}
+}
