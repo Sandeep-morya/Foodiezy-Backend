@@ -6,11 +6,11 @@ import cors from "cors";
 import server from "./config/server";
 import context from "./graphQL/context";
 import httpServer from "./config/httpServer";
-import { connect } from "mongoose";
+import dbConnect from "./config/dbConnect";
 
 (async () => {
 	// Connect to the MongoDB database using the URI from environment variable
-	await connect(process.env.MONGO_URI!);
+	await dbConnect(process.env.MONGO_URI);
 
 	// Set up CORS and JSON parsing for your Express app
 	app.use(cors<cors.CorsRequest>(), express.json());
