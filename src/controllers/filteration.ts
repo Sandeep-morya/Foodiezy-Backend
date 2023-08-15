@@ -11,16 +11,6 @@
 	const rating = checkForRating(ratingParams);
 	const costForTwo = checkCostForTwo(costForTwoParams);
 
-	console.log({
-		sortParams,
-		foodTypeParams,
-		cuisineParams,
-		deliveryParams,
-		ratingParams,
-		expoloreParams,
-		costForTwoParams,
-	});
-
 	if (veg === 0) {
 		options = { ...options, veg: true };
 	}
