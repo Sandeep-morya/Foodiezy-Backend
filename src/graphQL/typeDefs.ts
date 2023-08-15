@@ -1,8 +1,8 @@
 ﻿export default `#graphql
-# Query and its types
+# Query & its types
     type Query {
         getServiceAreaData(serviceAreaName:String!):ServiceArea
-        getRestaurants(serviceAreaId:ID!,page:Int,limit:Int):Restaurants
+        getRestaurants(serviceAreaId:ID!,queryParams:String,page:Int,limit:Int):Restaurants
         getCollections(serviceAreaId:ID!):[Collection]
     }
 
@@ -14,7 +14,6 @@
         createdAt: String
         updatedAt: String
         collections:[Collection]
-        restaurants:Restaurants
     }
     type Collection {
         _id:ID
@@ -40,7 +39,20 @@
         totalCount:Int
         documents:[Restaurant]
     }
-    type Restaurant {
+
+# Mutations & its types and inputs
+    type Mutation {
+        addServiceArea(name:String!, lat:Float!,lng:Float!):MutationResponse
+        addCollections(collectionsInput:[CollectionsInput]!):MutationResponse
+        addRestaurants(restaurantsInput:[RestaurantsInput]!):MutationResponse
+    }
+
+    type MutationResponse {
+        status:Boolean,
+        message:String!
+    }
+
+        type Restaurant {
         _id:ID
 		serviceAreaId: ID
         type: String
@@ -90,16 +102,5 @@
 		votesString: String!
 		delivery: DeliveryInfo!
 		discount: String!
-    }
-
-# Mutations
-    type MutationResponse {
-        status:Boolean,
-        message:String!
-    }
-    type Mutation {
-        addServiceArea(name:String!, lat:Float!,lng:Float!):MutationResponse
-        addCollections(collectionsInput:[CollectionsInput]!):MutationResponse
-        addRestaurants(restaurantsInput:[RestaurantsInput]!):MutationResponse
     }
 `;

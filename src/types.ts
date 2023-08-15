@@ -79,6 +79,7 @@ export interface AddRestarantsParams {
 
 export interface GetRestaurantsParams {
 	serviceAreaId: string;
+	queryParams?: string;
 	page?: number;
 	limit?: number;
 }
@@ -91,4 +92,13 @@ export interface AddServiceAreaParams {
 
 export interface GetServiceAreaDataParams {
 	serviceAreaName: string;
+}
+
+export interface Restaurants {
+	serviceAreaId: string;
+	page: number;
+	limit: number;
+	count: number;
+	totalCount: number;
+	documents: IRestaurant[];
 }
