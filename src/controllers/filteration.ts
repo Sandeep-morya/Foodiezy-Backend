@@ -9,6 +9,8 @@
 
 	const veg = checkForVeg(foodTypeParams);
 	const rating = checkForRating(ratingParams);
+	const costForTwo = checkCostForTwo(costForTwoParams);
+
 	console.log({
 		sortParams,
 		foodTypeParams,
@@ -40,6 +42,9 @@
 	}
 
 	// '₹300 - ₹500', 'Greater than ₹500', 'Less than ₹300'
+	if (costForTwo) {
+		options = { ...options, costForTwo };
+	}
 
 	return options;
 };
@@ -72,4 +77,37 @@ function checkForRating(ratingParams: string[]) {
 	return false;
 }
 
+function checkCostForTwo(costForTwoParams: string[]) {
+	const paramsLength = costForTwoParams.length;
+	// case-1 ['₹300 - ₹500']
+	// case-2 ['₹300 - ₹500', 'Greater than ₹500',]
+	// case-3 ['Greater than ₹500']
+	// case-4 ['Greater than ₹500', 'Less than ₹300']
+	// case-5 ['Less than ₹300']
+	// case-6 ['₹300 - ₹500','Less than ₹300']
+
+	if (paramsLength > 0 && paramsLength < 3) {
+		if (paramsLength === 1) {
+			if (costForTwoParams[0] === "₹300 - ₹500") {
+				return { $gte: 300, $lte: 500 };
+			} else if (costForTwoParams[0] === "Greater than ₹500") {
+				return { $gte: 500 };
+			} else {
+				return { $lte: 300 };
+			}
+		} else {
+			const first = costForTwoParams[0];
+			const second = costForTwoParams[1];
+
+			if (first === "₹300 - ₹500" && second === "Greater than ₹500") {
+				return { $gte: 300 };
+			} else if (first === "Greater than ₹500" && second === "Less than ₹300") {
+				return { $or: [{ $lte: 300 }, { $gte: 500 }] };
+			} else {
+				return { $lte: 500 };
+			}
+		}
+	}
+	return false;
+}
 export default getDynamicOptions;

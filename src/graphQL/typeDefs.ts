@@ -63,7 +63,7 @@
 		locality: String
 		veg: Boolean
 		areaName: String
-		costForTwo: String
+		costForTwo: Int
 		rating: Float
 		votesString: String
 		delivery: Delivery
@@ -97,7 +97,7 @@
 		locality: String!
 		veg: Boolean!
 		areaName: String!
-		costForTwo: String!
+		costForTwo: Int!
 		rating: Float!
 		votesString: String!
 		delivery: DeliveryInfo!

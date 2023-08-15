@@ -15,7 +15,7 @@ const restaurantSchema = new Schema(
 		locality: { type: String, default: "" },
 		veg: { type: Boolean, required: true },
 		areaName: { type: String, required: true },
-		costForTwo: { type: String, required: true },
+		costForTwo: { type: Number, required: true },
 		rating: { type: Number, required: true },
 		votesString: { type: String, required: true },
 		delivery: {
