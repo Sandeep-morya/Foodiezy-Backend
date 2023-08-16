@@ -38,7 +38,7 @@ const getRestaurants = async (
 
 	const sortParams = url.get("sortby");
 
-	let order: any = { createdAt: 1 };
+	let order: any = { createdAt: -1 };
 	switch (sortParams) {
 		case "rating":
 			order = { rating: -1 };
@@ -47,16 +47,16 @@ const getRestaurants = async (
 			order = { name: 1 };
 			break;
 		case "h2l":
-			order = { costForTwo: 1 };
+			order = { costForTwo: -1 };
 			break;
 		case "l2h":
-			order = { costForTwo: -1 };
+			order = { costForTwo: 1 };
 			break;
 		case "delivery":
 			order = { "delivery.time": -1 };
 			break;
 		default:
-			order = { createdAt: 1 };
+			order = { createdAt: -1 };
 			break;
 	}
 	const documents = await Restaurant.find(options)
