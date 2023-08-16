@@ -53,7 +53,7 @@ const getRestaurants = async (
 			order = { costForTwo: 1 };
 			break;
 		case "delivery":
-			order = { "delivery.time": -1 };
+			order = { "delivery.time": 1 };
 			break;
 		default:
 			order = { createdAt: -1 };
