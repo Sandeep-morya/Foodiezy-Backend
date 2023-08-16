@@ -18,8 +18,8 @@ import dbConnect from "./config/dbConnect";
 	// Start the Apollo Server
 	await server.start();
 
-	// Add Apollo Server middleware to the "/graphql" endpoint
-	app.use("/graphql", expressMiddleware(server, { context }));
+	// Add Apollo Server middleware to the "/foodiezy" endpoint
+	app.use("/foodiezy", expressMiddleware(server, { context }));
 
 	// Start the HTTP server
 	httpServer.listen(process.env.PORT, () => {

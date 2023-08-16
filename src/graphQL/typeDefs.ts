@@ -4,6 +4,7 @@
         getServiceAreaData(serviceAreaName:String!):ServiceArea
         getRestaurants(serviceAreaId:ID!,queryParams:String,page:Int,limit:Int):Restaurants
         getCollections(serviceAreaId:ID!):[Collection]
+        getRestaurant(id:ID!):Restaurant
     }
 
     type ServiceArea {

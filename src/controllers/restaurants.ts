@@ -8,6 +8,7 @@ import type {
 	Parent,
 } from "../types";
 import getDynamicOptions from "./filteration";
+import getSortingOrder from "./sorting";
 
 const addRestaurants = async (
 	_: Parent,
@@ -33,34 +34,11 @@ const getRestaurants = async (
 	const url = new URL(`https://example.com/path?${queryParams || ""}`)
 		.searchParams;
 	const options = getDynamicOptions(url, { serviceAreaId });
-
+	let order = getSortingOrder(url);
 	const totalCount = await Restaurant.countDocuments(options);
 
-	const sortParams = url.get("sortby");
-
-	let order: any = { createdAt: -1 };
-	switch (sortParams) {
-		case "rating":
-			order = { rating: -1 };
-			break;
-		case "title":
-			order = { name: 1 };
-			break;
-		case "h2l":
-			order = { costForTwo: -1 };
-			break;
-		case "l2h":
-			order = { costForTwo: 1 };
-			break;
-		case "delivery":
-			order = { "delivery.time": 1 };
-			break;
-		default:
-			order = { createdAt: -1 };
-			break;
-	}
 	const documents = await Restaurant.find(options)
-		.sort(order)
+		.sort(order as any)
 		.skip(page * limit)
 		.limit(limit);
 
@@ -74,7 +52,11 @@ const getRestaurants = async (
 	};
 };
 
-export { addRestaurants, getRestaurants };
+const getRestaurant = async (_: Parent, { id }: { id: string }) => {
+	return await Restaurant.findById(id);
+};
+
+export { addRestaurants, getRestaurants, getRestaurant };
 /*
 {
   sortParams: null,
