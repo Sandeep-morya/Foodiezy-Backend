@@ -29,11 +29,38 @@ const getRestaurants = async (
 	serviceAreaId = parent?._id || serviceAreaId;
 	page = page || 0;
 	limit = limit || 20;
+
 	const url = new URL(`https://example.com/path?${queryParams || ""}`)
 		.searchParams;
 	const options = getDynamicOptions(url, { serviceAreaId });
+
 	const totalCount = await Restaurant.countDocuments(options);
+
+	const sortParams = url.get("sortby");
+
+	let order: any = { createdAt: 1 };
+	switch (sortParams) {
+		case "rating":
+			order = { rating: -1 };
+			break;
+		case "title":
+			order = { name: 1 };
+			break;
+		case "h2l":
+			order = { costForTwo: 1 };
+			break;
+		case "l2h":
+			order = { costForTwo: -1 };
+			break;
+		case "delivery":
+			order = { "delivery.time": -1 };
+			break;
+		default:
+			order = { createdAt: 1 };
+			break;
+	}
 	const documents = await Restaurant.find(options)
+		.sort(order)
 		.skip(page * limit)
 		.limit(limit);
 

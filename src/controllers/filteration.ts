@@ -1,5 +1,4 @@
 ﻿const getDynamicOptions = (url: URLSearchParams, options: object) => {
-	const sortParams = url.get("sortby");
 	const foodTypeParams = url.getAll("foodType");
 	const cuisineParams = url.getAll("cuisine");
 	const deliveryParams = url.getAll("delivery");
