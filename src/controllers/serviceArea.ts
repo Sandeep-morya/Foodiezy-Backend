@@ -2,7 +2,6 @@
 import ServiceArea from "../model/serviceAera";
 import type {
 	AddServiceAreaParams,
-	Context,
 	Parent,
 	GetServiceAreaDataParams,
 } from "../types";
@@ -10,7 +9,6 @@ import type {
 const addServiceArea = async (
 	_: Parent,
 	{ name, lat, lng }: AddServiceAreaParams,
-	conext: Context,
 ) => {
 	const area = await ServiceArea.findOne({
 		$or: [{ name }, { $and: [{ lat }, { lng }] }],
@@ -34,7 +32,6 @@ const addServiceArea = async (
 const getServiceAreaData = async (
 	_: Parent,
 	{ serviceAreaName }: GetServiceAreaDataParams,
-	context: Context,
 ) => {
 	const data = await ServiceArea.findOne({ name: serviceAreaName });
 	if (!data) throw new GraphQLError("Services are not yet active in this area");

@@ -2,7 +2,6 @@
 import Collection from "../model/collection";
 import type {
 	AddCollectionsParams,
-	Context,
 	GetCollectionParams,
 	ICollection,
 	Parent,
@@ -11,7 +10,6 @@ import type {
 const addCollections = async (
 	_: Parent,
 	{ collectionsInput }: AddCollectionsParams,
-	conext: Context,
 ) => {
 	await Collection.create(collectionsInput);
 	return {
@@ -23,7 +21,6 @@ const addCollections = async (
 const getCollections = async (
 	parent: ICollection | Parent,
 	{ serviceAreaId }: GetCollectionParams,
-	conext: Context,
 ) => {
 	serviceAreaId = parent?._id || serviceAreaId;
 	return await Collection.find({ serviceAreaId });

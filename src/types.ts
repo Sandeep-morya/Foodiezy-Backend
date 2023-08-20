@@ -1,4 +1,6 @@
-﻿export interface Context {}
+﻿export interface Context {
+	token?: string;
+}
 
 export type Parent = null;
 
@@ -101,4 +103,20 @@ export interface Restaurants {
 	count: number;
 	totalCount: number;
 	documents: IRestaurant[];
+}
+
+export interface registerUserParams {
+	name: string;
+	email: string;
+	image?: string;
+	password?: string;
+	provider?: string;
+}
+
+export interface IUser {
+	_id: string;
+	name: string;
+	email: string;
+	image: string;
+	provider: string;
 }

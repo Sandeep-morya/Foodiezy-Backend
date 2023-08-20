@@ -2,7 +2,6 @@
 import Restaurant from "../model/restaurant";
 import type {
 	AddRestarantsParams,
-	Context,
 	GetRestaurantsParams,
 	IRestaurant,
 	Parent,
@@ -13,7 +12,6 @@ import getSortingOrder from "./sorting";
 const addRestaurants = async (
 	_: Parent,
 	{ restaurantsInput }: AddRestarantsParams,
-	conext: Context,
 ) => {
 	await Restaurant.create(restaurantsInput);
 	return {
@@ -25,7 +23,6 @@ const addRestaurants = async (
 const getRestaurants = async (
 	parent: IRestaurant | Parent,
 	{ serviceAreaId, queryParams, page, limit }: GetRestaurantsParams,
-	conext: Context,
 ) => {
 	serviceAreaId = parent?._id || serviceAreaId;
 	page = page || 0;

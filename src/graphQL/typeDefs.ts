@@ -1,10 +1,22 @@
 ﻿export default `#graphql
-# Query & its types
     type Query {
         getServiceAreaData(serviceAreaName:String!):ServiceArea
         getRestaurants(serviceAreaId:ID!,queryParams:String,page:Int,limit:Int):Restaurants
         getCollections(serviceAreaId:ID!):[Collection]
         getRestaurant(id:ID!):Restaurant
+        getUser:User
+    }
+
+    type Cart {
+        userId: ID
+		dishId: ID
+		dishName: String
+		category: String
+		imageId: String
+		price: Int
+		count: Int
+		restaurantId: ID
+		restaurantName: String
     }
 
     type ServiceArea {
@@ -41,16 +53,30 @@
         documents:[Restaurant]
     }
 
-# Mutations & its types and inputs
+    type User {
+        _id:ID
+		name: String
+		email: String
+		image: String
+		provider: String
+        cart:[Cart]
+    }
+
+
     type Mutation {
         addServiceArea(name:String!, lat:Float!,lng:Float!):MutationResponse
         addCollections(collectionsInput:[CollectionsInput]!):MutationResponse
         addRestaurants(restaurantsInput:[RestaurantsInput]!):MutationResponse
+        registerUser(name:String!,email:String!,image:String,password:String,provider:String):RegistrationResponse
     }
 
     type MutationResponse {
         status:Boolean,
         message:String!
+    }
+    type RegistrationResponse {
+        token:String,
+        about:User
     }
 
         type Restaurant {
