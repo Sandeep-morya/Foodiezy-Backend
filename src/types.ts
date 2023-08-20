@@ -120,3 +120,17 @@ export interface IUser {
 	image: string;
 	provider: string;
 }
+
+export interface CartDish {
+	dishId: string;
+	dishName: string;
+	imageId: string;
+	price: number;
+	count: number;
+	category: string;
+}
+
+export interface CartItem extends CartDish {
+	restaurantId: string;
+	restaurantName: string;
+}

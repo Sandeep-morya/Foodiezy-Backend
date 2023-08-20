@@ -2,6 +2,7 @@
 import User from "../model/user";
 import type { Context, Parent, registerUserParams } from "../types";
 import jwt from "jsonwebtoken";
+import Cart from "../model/cart";
 
 const secret_key = process.env.SECRET_KEY;
 
@@ -19,6 +20,12 @@ const registerUser = async (_: Parent, user: registerUserParams) => {
 	} else {
 		const data = new User(user);
 		const res = await data.save();
+		// initializing empty Cart for user
+		const cart = new Cart({
+			userId: res._id,
+			cartItems: [],
+		});
+		await cart.save();
 		const token = jwt.sign(String(res._id), secret_key);
 		const userObject = {
 			_id: res._id,
@@ -31,7 +38,7 @@ const registerUser = async (_: Parent, user: registerUserParams) => {
 	}
 };
 
-const getUser = async (_: Parent, params: null, { token }: Context) => {
+const getUser = async (_: Parent, x: null, { token }: Context) => {
 	if (!token) {
 		throw new GraphQLError("Token Must be Provided to access this route");
 	}

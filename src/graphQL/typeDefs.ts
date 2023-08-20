@@ -8,7 +8,6 @@
     }
 
     type Cart {
-        userId: ID
 		dishId: ID
 		dishName: String
 		category: String
@@ -68,6 +67,7 @@
         addCollections(collectionsInput:[CollectionsInput]!):MutationResponse
         addRestaurants(restaurantsInput:[RestaurantsInput]!):MutationResponse
         registerUser(name:String!,email:String!,image:String,password:String,provider:String):RegistrationResponse
+        mutateCart(cartInput:[CartInput]!):String
     }
 
     type MutationResponse {
@@ -129,5 +129,16 @@
 		votesString: String!
 		delivery: DeliveryInfo!
 		discount: String!
+    }
+
+    input CartInput {
+		dishId: ID!
+		dishName: String!
+		category: String!
+		imageId: String!
+		price: Int!
+		count: Int!
+		restaurantId: ID!
+		restaurantName: String!
     }
 `;
