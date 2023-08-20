@@ -19,7 +19,7 @@
 	}
 
 	if (cuisineParams.length > 0) {
-		options = { ...options, cuisines: { $all: cuisineParams } };
+		options = { ...options, cuisines: { $in: cuisineParams } };
 	}
 
 	if (rating) {
