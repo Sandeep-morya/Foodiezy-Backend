@@ -49,6 +49,7 @@
         limit:Int
         count:Int
         totalCount:Int
+        modified:Boolean
         documents:[Restaurant]
     }
 

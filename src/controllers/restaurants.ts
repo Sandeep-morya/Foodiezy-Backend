@@ -46,6 +46,7 @@ const getRestaurants = async (
 		count: documents.length,
 		totalCount,
 		documents,
+		modified: JSON.stringify({ serviceAreaId }) !== JSON.stringify(options),
 	};
 };
 
