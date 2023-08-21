@@ -4,7 +4,7 @@
         getRestaurants(serviceAreaId:ID!,queryParams:String,page:Int,limit:Int):Restaurants
         getCollections(serviceAreaId:ID!):[Collection]
         getRestaurant(id:ID!):Restaurant
-        getUser:User
+        getUser(id:ID!):User
     }
 
     type Cart {
@@ -67,7 +67,7 @@
         addCollections(collectionsInput:[CollectionsInput]!):MutationResponse
         addRestaurants(restaurantsInput:[RestaurantsInput]!):MutationResponse
         registerUser(name:String!,email:String!,image:String,password:String,provider:String):RegistrationResponse
-        mutateCart(cartInput:[CartInput]!):String
+        mutateCart(cartInput:[CartInput!]!,userId:ID!):String
     }
 
     type MutationResponse {
@@ -79,7 +79,7 @@
         about:User
     }
 
-        type Restaurant {
+     type Restaurant {
         _id:ID
 		serviceAreaId: ID
         type: String
@@ -98,7 +98,6 @@
         createdAt: String
         updatedAt: String
     }
-
 
     input CollectionsInput {
         serviceAreaId: ID!

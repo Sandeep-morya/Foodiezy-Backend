@@ -1,7 +1,6 @@
 ﻿import { GraphQLError } from "graphql";
 import Cart from "../model/cart";
-import { CartItem, Context, IUser, Parent } from "../types";
-import jwt from "jsonwebtoken";
+import { IUser, MutateCartParams, Parent } from "../types";
 const secret_key = process.env.SECRET_KEY;
 
 const getCart = async (parent: IUser) => {
@@ -11,17 +10,12 @@ const getCart = async (parent: IUser) => {
 
 const mutateCart = async (
 	_: Parent,
-	{ cartInput }: { cartInput: CartItem[] },
-	{ token }: Context,
+	{ cartInput, userId }: MutateCartParams,
 ) => {
 	if (!secret_key) {
 		throw new GraphQLError("Provide SECRET_KEY in .env");
 	}
-	if (!token) {
-		throw new GraphQLError("Token Must be Provided to access this route");
-	}
 
-	const userId = jwt.verify(token, secret_key);
 	await Cart.findOneAndUpdate(
 		{ userId },
 		{ $set: { cartItems: cartInput } },

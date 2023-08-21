@@ -134,3 +134,8 @@ export interface CartItem extends CartDish {
 	restaurantId: string;
 	restaurantName: string;
 }
+
+export interface MutateCartParams {
+	cartInput: CartItem[];
+	userId: string;
+}

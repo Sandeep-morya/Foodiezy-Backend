@@ -38,16 +38,8 @@ const registerUser = async (_: Parent, user: registerUserParams) => {
 	}
 };
 
-const getUser = async (_: Parent, x: null, { token }: Context) => {
-	if (!token) {
-		throw new GraphQLError("Token Must be Provided to access this route");
-	}
-	if (!secret_key) {
-		throw new GraphQLError("Provide SECRET_KEY in .env");
-	}
-	const userId = jwt.verify(token, secret_key);
-	console.log(userId);
-	return User.findById(userId);
+const getUser = async (_: Parent, { id }: { id: string }) => {
+	return User.findById(id);
 };
 
 export { registerUser, getUser };
