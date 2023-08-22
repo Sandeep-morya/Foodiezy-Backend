@@ -30,11 +30,18 @@ const getRestaurants = async (
 
 	const url = new URL(`https://example.com/path?${queryParams || ""}`)
 		.searchParams;
-	console.log(queryParams);
 
 	const options =
 		limit === 30
-			? { name: new RegExp(queryParams, "i"), serviceAreaId }
+			? {
+					serviceAreaId,
+					$or: [
+						{ name: { $regex: queryParams, $options: "i" } },
+						{
+							cuisines: { $elemMatch: { $regex: queryParams, $options: "i" } },
+						},
+					],
+			  }
 			: getDynamicOptions(url, { serviceAreaId });
 
 	let order = getSortingOrder(url);
