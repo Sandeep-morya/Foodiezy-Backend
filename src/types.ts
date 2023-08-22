@@ -81,7 +81,7 @@ export interface AddRestarantsParams {
 
 export interface GetRestaurantsParams {
 	serviceAreaId: string;
-	queryParams?: string;
+	queryParams: string;
 	page?: number;
 	limit?: number;
 }

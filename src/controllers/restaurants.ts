@@ -30,7 +30,13 @@ const getRestaurants = async (
 
 	const url = new URL(`https://example.com/path?${queryParams || ""}`)
 		.searchParams;
-	const options = getDynamicOptions(url, { serviceAreaId });
+	console.log(queryParams);
+
+	const options =
+		limit === 30
+			? { name: new RegExp(queryParams, "i"), serviceAreaId }
+			: getDynamicOptions(url, { serviceAreaId });
+
 	let order = getSortingOrder(url);
 	const totalCount = await Restaurant.countDocuments(options);
 
@@ -55,33 +61,3 @@ const getRestaurant = async (_: Parent, { id }: { id: string }) => {
 };
 
 export { addRestaurants, getRestaurants, getRestaurant };
-/*
-{
-  sortParams: null,
-  foodTypeParams: [ 'Pure Veg' ],
-  cuisineParams: [ 'Bakery', 'Desserts', 'Sweets' ],
-  deliveryParams: [],
-  ratingParams: [ 'Ratings 4.0+', 'Ratings 4.5+' ],
-  expoloreParams: [],
-  costForTwoParams: [ '₹300 - ₹500' ]
-}
-{
-  sortParams: 'title',
-  foodTypeParams: [ 'Pure Veg' ],
-  cuisineParams: [ 'Bakery', 'Desserts', 'Sweets' ],
-  deliveryParams: [ 'Fast Delivery' ],
-  ratingParams: [ 'Ratings 4.0+', 'Ratings 4.5+' ],
-  expoloreParams: [ 'New on Foodiezy' ],
-  costForTwoParams: [ '₹300 - ₹500' ]
-}
-
-console.log({
-		sortParams,
-		foodTypeParams,
-		cuisineParams,
-		deliveryParams,
-		ratingParams,
-		expoloreParams,
-		costForTwoParams,
-	});
- */
