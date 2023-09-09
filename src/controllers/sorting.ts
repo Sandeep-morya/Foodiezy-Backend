@@ -18,7 +18,7 @@
 			return { "delivery.time": 1 };
 
 		default:
-			return { createdAt: -1 };
+			return {};
 	}
 };
 
